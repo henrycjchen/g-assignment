@@ -3,7 +3,7 @@
 <template>
   <div class="bg-main h-100vh w-100vw flex flex-col">
     <TopMenu />
-    <div class="flex flex-1 pb-20px">
+    <div class="flex flex-1 pb-20px overflow-hidden">
       <LeftMenu />
       <RouterView />
     </div>
