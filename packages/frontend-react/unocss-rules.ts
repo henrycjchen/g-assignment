@@ -1,4 +1,4 @@
-export default [
+export const rules =  [
   ['font-14', {
     'font-family': 'Inter',
     'font-style': 'normal',
