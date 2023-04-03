@@ -6,7 +6,7 @@ import Title from './components/Title';
 
 export default function ChannelContent() {
   return (
-    <div className="flex flex-col w-100%">
+    <div className="flex flex-col w-100% bg-divider">
       <Title />
       <Messages />
       <Input />

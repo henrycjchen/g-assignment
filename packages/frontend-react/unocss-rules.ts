@@ -1,4 +1,11 @@
-export const rules =  [
+export const rules = [
+  ['font-12', {
+    'font-family': 'Inter',
+    'font-style': 'normal',
+    'font-weight': 500,
+    'font-size': '12px',
+    'line-height': '130%',
+  }],
   ['font-14', {
     'font-family': 'Inter',
     'font-style': 'normal',
@@ -41,6 +48,13 @@ export const rules =  [
     'font-size': '18px',
     'line-height': '22px',
   }],
+  ['font-18-heavy', {
+    'font-family': 'Inter',
+    'font-style': 'normal',
+    'font-weight': 600,
+    'font-size': '18px',
+    'line-height': '130%',
+  }],
   ['color-text-primary', {
     color: '#C9C7D0',
   }],
@@ -57,7 +71,7 @@ export const rules =  [
     color: '#7B798F'
   }],
   ['border-text-secondary', {
-    color: '#7B798F'
+    'border-color': '#7B798F'
   }],
   ['bg-main', {
     background: '#0C0E13'
@@ -70,5 +84,11 @@ export const rules =  [
   }],
   ['bg-channel-list', {
     background: '#1D1C21',
+  }],
+  ['bg-card-highlight2', {
+    background: '#454451',
+  }],
+  ['bg-card-primary', {
+    background: 'linear-gradient(0deg, rgba(4, 177, 125, 0.5), rgba(4, 177, 125, 0.5)), #FFFFFF',
   }]
 ]
