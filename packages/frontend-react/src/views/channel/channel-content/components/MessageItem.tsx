@@ -17,7 +17,8 @@ export default function MessageItem({direction=Direction.Left, isPrimary=false}:
           <div className="font-12 color-text-secondary">20:34</div>
         </div>
         <div className={
-          'font-15 p-15px border-rd-8px border-rd-lt-0 '
+          'font-15 p-15px border-rd-8px '
+          + (direction === Direction.Left? 'border-rd-lt-0 ':'border-rd-rt-0 ')
           + (isPrimary ? 'bg-card-primary color-#0C0E13' : 'bg-card-highlight2')
         }>
           Check out Vanilla Forums (11/17 - 11/18/20) for free.
