@@ -1,8 +1,6 @@
-
-
-import MenuForum from '@/assets/imgs/menu-forum.png'
-import MenuChat from '@/assets/imgs/menu-chat.png'
-import MenuMatches from '@/assets/imgs/menu-Matches.png'
+import MenuForum from '@/assets/imgs/menu-forum.png';
+import MenuChat from '@/assets/imgs/menu-chat.png';
+import MenuMatches from '@/assets/imgs/menu-Matches.png';
 
 export default function Engage() {
   return (
@@ -21,5 +19,5 @@ export default function Engage() {
         <div className="font-18 color-hint">Matches</div>
       </div>
     </>
-  )
+  );
 }

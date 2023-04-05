@@ -1,4 +1,4 @@
-import MessageItem, {Direction} from './MessageItem';
+import MessageItem, { Direction } from './MessageItem';
 
 export default function Messages() {
   return (

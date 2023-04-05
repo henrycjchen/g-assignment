@@ -1,4 +1,3 @@
-
 import IconSearch from '@/assets/imgs/icon-search.png';
 
 export default function Search() {
@@ -7,5 +6,5 @@ export default function Search() {
       <img src={IconSearch} className="w-18px h-18px mr-5px" alt="" />
       <div className="color-hint font-14">Search</div>
     </div>
-  )
+  );
 }

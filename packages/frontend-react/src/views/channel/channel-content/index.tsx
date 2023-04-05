@@ -1,5 +1,3 @@
-
-
 import Input from './components/Input';
 import Messages from './components/Messages';
 import Title from './components/Title';
@@ -11,5 +9,5 @@ export default function ChannelContent() {
       <Messages />
       <Input />
     </div>
-  )
+  );
 }

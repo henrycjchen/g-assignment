@@ -1,6 +1,5 @@
-
-import MenuMembers from '@/assets/imgs/menu-member.png'
-import MenuContributors from '@/assets/imgs/menu-contributors.png'
+import MenuMembers from '@/assets/imgs/menu-member.png';
+import MenuContributors from '@/assets/imgs/menu-contributors.png';
 
 export default function People() {
   return (
@@ -15,5 +14,5 @@ export default function People() {
         <div className="font-18 color-hint">Matches</div>
       </div>
     </>
-  )
+  );
 }

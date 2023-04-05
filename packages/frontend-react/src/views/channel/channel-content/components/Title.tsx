@@ -1,4 +1,4 @@
-import IconMember from '@/assets/imgs/icon-member.png'
+import IconMember from '@/assets/imgs/icon-member.png';
 
 export default function Title() {
   return (
@@ -12,5 +12,5 @@ export default function Title() {
       </div>
       <div className="h-1px bg-#fff opacity-10"></div>
     </>
-  )
+  );
 }

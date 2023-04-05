@@ -1,5 +1,3 @@
-
-
 import Engage from './components/Engage';
 import People from './components/People';
 import LogoLeft from '@/assets/imgs/logo-left.png';
@@ -12,7 +10,7 @@ export default function LeftMenu() {
         <div className="w-165px h-1px bg-divider mb-30px"></div>
         <People />
       </div>
-      <img className="w-119px h-33.44px" src={LogoLeft} alt="" />    
+      <img className="w-119px h-33.44px" src={LogoLeft} alt="" />
     </div>
-  )
+  );
 }

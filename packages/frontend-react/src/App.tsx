@@ -11,5 +11,5 @@ export default function App() {
         <Channel />
       </div>
     </div>
-  )
+  );
 }

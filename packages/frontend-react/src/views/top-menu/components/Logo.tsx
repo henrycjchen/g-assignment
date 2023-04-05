@@ -1,5 +1,4 @@
-
-import LogoLeft from '@/assets/imgs/logo-top.png'
+import LogoLeft from '@/assets/imgs/logo-top.png';
 
 export default function Logo() {
   return (
@@ -7,5 +6,5 @@ export default function Logo() {
       <img className="w-40px h-40px mr-15px" src={LogoLeft} alt="" />
       <div className="font-14 p-10px">Gradual Community</div>
     </div>
-  )
+  );
 }

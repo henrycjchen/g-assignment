@@ -1,5 +1,5 @@
 import Logo from './components/Logo';
-import RightBtns from './components/right-btns/index'
+import RightBtns from './components/right-btns/index';
 
 export default function TopMenu() {
   return (
@@ -7,5 +7,5 @@ export default function TopMenu() {
       <Logo />
       <RightBtns />
     </div>
-  )
+  );
 }
