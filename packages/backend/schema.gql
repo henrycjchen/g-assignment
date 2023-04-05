@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: String!
+
+  """user name"""
+  name: String!
+
+  """user avatar url"""
+  avatar: String!
+}
+
+type Query {
+  users: [User!]!
+  user(_id: String!): User!
+}

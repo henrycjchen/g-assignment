@@ -22,14 +22,14 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { HydratedDocument } from 'mongoose';
-export type UserDocument = HydratedDocument<User>;
-export declare class User {
-    name: string;
-    avatar: string;
+import { Schema as MongooseSchema } from 'mongoose';
+export declare class Blog {
+    _id: MongooseSchema.Types.ObjectId;
+    title: string;
+    description: string;
 }
-export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, import("mongoose").Document<unknown, any, User> & Omit<User & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<User>> & Omit<import("mongoose").FlatRecord<User> & {
-    _id: import("mongoose").Types.ObjectId;
-}, never>>;
+export declare const BlogSchema: MongooseSchema<Blog, import("mongoose").Model<Blog, any, any, any, import("mongoose").Document<unknown, any, Blog> & Omit<Blog & Required<{
+    _id: MongooseSchema.Types.ObjectId;
+}>, never>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Blog, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Blog>> & Omit<import("mongoose").FlatRecord<Blog> & Required<{
+    _id: MongooseSchema.Types.ObjectId;
+}>, never>>;

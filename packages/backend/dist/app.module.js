@@ -12,13 +12,20 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./modules/user/user.module");
+const graphql_1 = require("@nestjs/graphql");
+const apollo_1 = require("@nestjs/apollo");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            graphql_1.GraphQLModule.forRoot({
+                driver: apollo_1.ApolloDriver,
+                autoSchemaFile: 'schema.gql',
+                playground: true,
+            }),
             mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017', {
-                dbName: 'gradual'
+                dbName: 'gradual',
             }),
             user_module_1.UserModule,
         ],
