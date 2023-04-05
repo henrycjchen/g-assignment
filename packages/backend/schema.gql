@@ -12,7 +12,22 @@ type User {
   avatar: String!
 }
 
+type Channel {
+  _id: String!
+
+  """channel title"""
+  title: String!
+
+  """channel type"""
+  type: Float!
+
+  """channel's user id"""
+  users: [String!]!
+}
+
 type Query {
   users: [User!]!
   user(_id: String!): User!
+  channels: [Channel!]!
+  channel(_id: String!): Channel!
 }

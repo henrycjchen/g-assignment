@@ -14,6 +14,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./modules/user/user.module");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
+const channel_module_1 = require("./modules/channel/channel.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -28,6 +29,7 @@ AppModule = __decorate([
                 dbName: 'gradual',
             }),
             user_module_1.UserModule,
+            channel_module_1.ChannelModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

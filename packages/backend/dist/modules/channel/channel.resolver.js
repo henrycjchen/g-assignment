@@ -12,40 +12,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-const common_1 = require("@nestjs/common");
-const user_service_1 = require("./user.service");
-let UserController = class UserController {
-    constructor(userService) {
-        this.userService = userService;
+exports.ChannelResolver = void 0;
+const graphql_1 = require("@nestjs/graphql");
+const channel_service_1 = require("./channel.service");
+const channel_schema_1 = require("./channel.schema");
+let ChannelResolver = class ChannelResolver {
+    constructor(channelService) {
+        this.channelService = channelService;
     }
-    async findAll() {
-        const result = await this.userService.findAll();
-        console.log('findAll result', result);
-        return result;
+    findAll() {
+        return this.channelService.findAll();
     }
-    async findOne(id) {
-        const result = await this.userService.findOne(id);
-        console.log('result', result);
-        return result;
+    findOne(id) {
+        return this.channelService.findOne(id);
     }
 };
 __decorate([
-    (0, common_1.Get)(''),
+    (0, graphql_1.Query)(() => [channel_schema_1.Channel], { name: 'channels' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "findAll", null);
+    __metadata("design:returntype", void 0)
+], ChannelResolver.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, graphql_1.Query)(() => channel_schema_1.Channel, { name: 'channel' }),
+    __param(0, (0, graphql_1.Args)('_id', { type: () => String })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "findOne", null);
-UserController = __decorate([
-    (0, common_1.Controller)('user'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
-], UserController);
-exports.UserController = UserController;
-//# sourceMappingURL=user.controller.js.map
+    __metadata("design:returntype", void 0)
+], ChannelResolver.prototype, "findOne", null);
+ChannelResolver = __decorate([
+    (0, graphql_1.Resolver)(() => channel_schema_1.Channel),
+    __metadata("design:paramtypes", [channel_service_1.ChannelService])
+], ChannelResolver);
+exports.ChannelResolver = ChannelResolver;
+//# sourceMappingURL=channel.resolver.js.map

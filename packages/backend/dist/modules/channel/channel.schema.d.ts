@@ -23,13 +23,19 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema as MongooseSchema } from 'mongoose';
-export declare class Blog {
+declare enum ChannelType {
+    User = 1,
+    Group = 2
+}
+export declare class Channel {
     _id: MongooseSchema.Types.ObjectId;
     title: string;
-    description: string;
+    type: ChannelType;
+    users: string[];
 }
-export declare const BlogSchema: MongooseSchema<Blog, import("mongoose").Model<Blog, any, any, any, import("mongoose").Document<unknown, any, Blog> & Omit<Blog & Required<{
+export declare const ChannelSchema: MongooseSchema<Channel, import("mongoose").Model<Channel, any, any, any, import("mongoose").Document<unknown, any, Channel> & Omit<Channel & Required<{
     _id: MongooseSchema.Types.ObjectId;
-}>, never>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Blog, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Blog>> & Omit<import("mongoose").FlatRecord<Blog> & Required<{
+}>, never>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Channel, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Channel>> & Omit<import("mongoose").FlatRecord<Channel> & Required<{
     _id: MongooseSchema.Types.ObjectId;
 }>, never>>;
+export {};

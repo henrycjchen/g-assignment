@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './modules/user/user.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ChannelModule } from './modules/channel/channel.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       dbName: 'gradual',
     }),
     UserModule,
+    ChannelModule,
   ],
   controllers: [AppController],
   providers: [AppService],

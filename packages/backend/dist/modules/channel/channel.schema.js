@@ -9,30 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlogSchema = exports.Blog = void 0;
+exports.ChannelSchema = exports.Channel = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const mongoose_1 = require("mongoose");
 const mongoose_2 = require("@nestjs/mongoose");
-let Blog = class Blog {
+var ChannelType;
+(function (ChannelType) {
+    ChannelType[ChannelType["User"] = 1] = "User";
+    ChannelType[ChannelType["Group"] = 2] = "Group";
+})(ChannelType || (ChannelType = {}));
+let Channel = class Channel {
 };
 __decorate([
     (0, graphql_1.Field)(() => String),
     __metadata("design:type", mongoose_1.Schema.Types.ObjectId)
-], Blog.prototype, "_id", void 0);
+], Channel.prototype, "_id", void 0);
 __decorate([
     (0, mongoose_2.Prop)(),
-    (0, graphql_1.Field)(() => String, { description: 'Blog Title' }),
+    (0, graphql_1.Field)(() => String, { description: 'channel title' }),
     __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
+], Channel.prototype, "title", void 0);
 __decorate([
     (0, mongoose_2.Prop)(),
-    (0, graphql_1.Field)(() => String, { description: 'Blog Description' }),
-    __metadata("design:type", String)
-], Blog.prototype, "description", void 0);
-Blog = __decorate([
+    (0, graphql_1.Field)(() => Number, { description: 'channel type' }),
+    __metadata("design:type", Number)
+], Channel.prototype, "type", void 0);
+__decorate([
+    (0, mongoose_2.Prop)(),
+    (0, graphql_1.Field)(() => [String], { description: "channel's user id" }),
+    __metadata("design:type", Array)
+], Channel.prototype, "users", void 0);
+Channel = __decorate([
     (0, mongoose_2.Schema)(),
     (0, graphql_1.ObjectType)()
-], Blog);
-exports.Blog = Blog;
-exports.BlogSchema = mongoose_2.SchemaFactory.createForClass(Blog);
-//# sourceMappingURL=user.model.js.map
+], Channel);
+exports.Channel = Channel;
+exports.ChannelSchema = mongoose_2.SchemaFactory.createForClass(Channel);
+//# sourceMappingURL=channel.schema.js.map
