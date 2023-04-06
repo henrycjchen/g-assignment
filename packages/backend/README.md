@@ -41,8 +41,9 @@ $ pnpm run test:cov
 - 端口分配配置 `sysctl net.inet.ip.portrange`
 
 ## 消息通知机制
+通信人在线的情况下，可以直接采用 socket.to(roomid) 的方式，群发信息
 
-为保证消息的触达成功率，这里采用消息队列的方式，先将发送方的数据存到消息队列里，再根据接收方的连接状态，异步从消息队列里获取接收方的信息，发送给接收方。
+如果要给离线的用户发送消息，则需要采用消息队列的方式，先将发送方的数据存到消息队列里，再根据接收方的连接状态，异步从消息队列里获取接收方的信息，发送给接收方。
 
 流程示意图如下：
 
@@ -66,3 +67,10 @@ sequenceDiagram
         Server -->> User2: send message
     end
 ```
+
+## 多进程部署
+多进程部署的情况下，socket 还需要借助数据库/中间服务，来实现跨服务器消息同步
+参考：
+- Redis 接入：https://socket.io/docs/v4/redis-adapter/
+- MongoDB 接入：https://socket.io/docs/v4/mongo-adapter/
+- 中间进程接入：https://socket.io/docs/v4/cluster-adapter/

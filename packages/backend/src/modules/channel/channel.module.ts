@@ -9,5 +9,6 @@ import { Channel, ChannelSchema } from './channel.schema';
     MongooseModule.forFeature([{ name: Channel.name, schema: ChannelSchema }]),
   ],
   providers: [ChannelResolver, ChannelService],
+  exports: [ChannelService],
 })
 export class ChannelModule {}

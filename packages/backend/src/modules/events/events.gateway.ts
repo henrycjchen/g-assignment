@@ -10,9 +10,20 @@ import { ObjectId } from 'mongoose';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Server, Socket } from 'socket.io';
+import { ChannelService } from '../channel/channel.service';
 import { UserService } from '../user/user.service';
 
-const clientCache: { client: Socket; userId?: ObjectId }[] = [];
+/**
+ * todo
+ * 需要对缓存设计淘汰机制，并断开对应连接
+ * 避免内存泄漏
+ */
+const clientCache: { client: Socket; userId?: string }[] = [];
+
+interface Message {
+  channelId: string;
+  message: string;
+}
 
 @WebSocketGateway({
   cors: {
@@ -20,39 +31,45 @@ const clientCache: { client: Socket; userId?: ObjectId }[] = [];
   },
 })
 export class EventsGateway {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly channelService: ChannelService
+  ) {}
   @WebSocketServer()
   server: Server;
 
   @SubscribeMessage('message')
-  findAll(@MessageBody() data: any, @ConnectedSocket() client: Socket): void {
-    const toClient = clientCache.find(
-      (cache) => cache.userId.toString() === data.toUserId
-    );
-
-    toClient?.client.emit('message', data.message);
+  message(
+    @MessageBody() data: Message,
+    @ConnectedSocket() client: Socket
+  ): void {
+    client.to(data.channelId).emit('message', data.message);
   }
 
   @SubscribeMessage('identity')
   async identity(
     @MessageBody() userId: string,
-    @ConnectedSocket() client: Socket
+    @ConnectedSocket() client: Socket,
+    // @WebSocketServer() server: Server,
   ): Promise<string> {
-    const cache = clientCache.find((v) => v.client.id === client.id);
     try {
       const user = await this.userService.findOne(userId);
-      cache.userId = user._id;
+      const cache = clientCache.some((v) => v.client.id === client.id);
+      if (!cache) {
+        clientCache.push({
+          client,
+          userId: user._id.toString(),
+        });
+      }
+      const channels = await this.channelService.findByUserId(userId);
+      client.join(channels.map((channel) => channel._id.toString()));
     } catch (e) {
-      cache.client.disconnect();
+      console.error('identity e', e);
     }
     return 'success ' + client.id;
   }
 
-  handleConnection(@ConnectedSocket() client: Socket) {
-    clientCache.push({
-      client,
-    });
-  }
+  handleConnection(@ConnectedSocket() client: Socket) {}
 
   handleDisconnect(@ConnectedSocket() client: Socket) {}
 }

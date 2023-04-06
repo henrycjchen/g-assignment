@@ -16,4 +16,8 @@ export class ChannelService {
   async findOne(id: string): Promise<Channel> {
     return this.channelModel.findOne({ _id: id }).exec();
   }
+
+  async findByUserId(userId: string): Promise<Channel[]> {
+    return this.channelModel.find({ users: { $all: [userId] } }).exec();
+  }
 }

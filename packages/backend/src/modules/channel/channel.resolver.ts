@@ -16,4 +16,9 @@ export class ChannelResolver {
   findOne(@Args('_id', { type: () => String }) id: string) {
     return this.channelService.findOne(id);
   }
+
+  // @Query(() => Channel, { name: 'channel' })
+  // find(@Args('_id', { type: () => String }) id: string) {
+  //   return this.channelService.fin (id);
+  // }
 }
