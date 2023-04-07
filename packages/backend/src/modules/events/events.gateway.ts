@@ -49,7 +49,7 @@ export class EventsGateway {
   @SubscribeMessage('identity')
   async identity(
     @MessageBody() userId: string,
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: Socket
     // @WebSocketServer() server: Server,
   ): Promise<string> {
     try {
@@ -68,8 +68,4 @@ export class EventsGateway {
     }
     return 'success ' + client.id;
   }
-
-  handleConnection(@ConnectedSocket() client: Socket) {}
-
-  handleDisconnect(@ConnectedSocket() client: Socket) {}
 }

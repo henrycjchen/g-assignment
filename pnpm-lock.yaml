@@ -80,7 +80,44 @@ importers:
       tsconfig-paths: 4.2.0
       typescript: 4.9.5
 
-  packages/frontend:
+  packages/frontend-react:
+    specifiers:
+      '@types/react': ^18.0.28
+      '@types/react-dom': ^18.0.11
+      '@typescript-eslint/eslint-plugin': ^5.0.0
+      '@typescript-eslint/parser': ^5.0.0
+      '@vitejs/plugin-react-swc': ^3.0.0
+      eslint: ^8.37.0
+      eslint-config-prettier: ^8.8.0
+      eslint-plugin-prettier: ^4.2.1
+      eslint-plugin-react: ^7.32.2
+      prettier: ^2.8.7
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      socket.io-client: ^4.6.1
+      typescript: ^4.9.5
+      unocss: ^0.50.6
+      vite: ^4.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      socket.io-client: 4.6.1
+    devDependencies:
+      '@types/react': 18.0.32
+      '@types/react-dom': 18.0.11
+      '@typescript-eslint/eslint-plugin': 5.57.0_bf234099016d3f44c24f2c0643bb9845
+      '@typescript-eslint/parser': 5.57.0_eslint@8.37.0+typescript@4.9.5
+      '@vitejs/plugin-react-swc': 3.2.0_vite@4.2.1
+      eslint: 8.37.0
+      eslint-config-prettier: 8.8.0_eslint@8.37.0
+      eslint-plugin-prettier: 4.2.1_c043b001e1feb7db3991c2f5367724d5
+      eslint-plugin-react: 7.32.2_eslint@8.37.0
+      prettier: 2.8.7
+      typescript: 4.9.5
+      unocss: 0.50.6_vite@4.2.1
+      vite: 4.2.1
+
+  packages/frontend-vue:
     specifiers:
       '@rushstack/eslint-patch': ^1.2.0
       '@types/jsdom': ^21.1.0
@@ -128,41 +165,6 @@ importers:
       vite: 4.2.1_@types+node@18.15.11
       vitest: 0.29.8_jsdom@21.1.1
       vue-tsc: 1.2.0_typescript@4.8.4
-
-  packages/frontend-react:
-    specifiers:
-      '@types/react': ^18.0.28
-      '@types/react-dom': ^18.0.11
-      '@typescript-eslint/eslint-plugin': ^5.0.0
-      '@typescript-eslint/parser': ^5.0.0
-      '@vitejs/plugin-react-swc': ^3.0.0
-      eslint: ^8.37.0
-      eslint-config-prettier: ^8.8.0
-      eslint-plugin-prettier: ^4.2.1
-      eslint-plugin-react: ^7.32.2
-      prettier: ^2.8.7
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      typescript: ^4.9.5
-      unocss: ^0.50.6
-      vite: ^4.2.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    devDependencies:
-      '@types/react': 18.0.32
-      '@types/react-dom': 18.0.11
-      '@typescript-eslint/eslint-plugin': 5.57.0_bf234099016d3f44c24f2c0643bb9845
-      '@typescript-eslint/parser': 5.57.0_eslint@8.37.0+typescript@4.9.5
-      '@vitejs/plugin-react-swc': 3.2.0_vite@4.2.1
-      eslint: 8.37.0
-      eslint-config-prettier: 8.8.0_eslint@8.37.0
-      eslint-plugin-prettier: 4.2.1_c043b001e1feb7db3991c2f5367724d5
-      eslint-plugin-react: 7.32.2_eslint@8.37.0
-      prettier: 2.8.7
-      typescript: 4.9.5
-      unocss: 0.50.6_vite@4.2.1
-      vite: 4.2.1
 
 packages:
 
@@ -3899,6 +3901,20 @@ packages:
       once: 1.4.0
     dev: true
 
+  /engine.io-client/6.4.0:
+    resolution: {integrity: sha512-GyKPDyoEha+XZ7iEqam49vz6auPnNJ9ZBfy89f+rMMas8AuiMWOZ9PVzu8xb9ZC6rafUqiGHSCfu22ih66E+1g==}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4
+      engine.io-parser: 5.0.6
+      ws: 8.11.0
+      xmlhttprequest-ssl: 2.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /engine.io-parser/5.0.6:
     resolution: {integrity: sha512-tjuoZDMAdEhVnSFleYPCtdL2GXwVTGtNjoeJd9IhIG3C1xs9uwxqRNEu5WpnDZCaozwVlK/nuQhpodhXSIMaxw==}
     engines: {node: '>=10.0.0'}
@@ -7171,6 +7187,20 @@ packages:
       - bufferutil
       - utf-8-validate
 
+  /socket.io-client/4.6.1:
+    resolution: {integrity: sha512-5UswCV6hpaRsNg5kkEHVcbBIXEYoVbMQaHJBXJCyEQ+CiFPV1NIOY0XOFWG4XR4GZcB8Kn6AsRs/9cy9TbqVMQ==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.1.0
+      debug: 4.3.4
+      engine.io-client: 6.4.0
+      socket.io-parser: 4.2.2
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /socket.io-parser/4.2.2:
     resolution: {integrity: sha512-DJtziuKypFkMMHCm2uIshOYC7QaylbtzQwiMYDuCKy3OPkjLzu4B2vAhTlqipRHHzrI0NJeBAizTK7X+6m1jVw==}
     engines: {node: '>=10.0.0'}
@@ -8155,6 +8185,7 @@ packages:
 
   /vue-template-compiler/2.7.14:
     resolution: {integrity: sha512-zyA5Y3ArvVG0NacJDkkzJuPQDF8RFeRlzV2vLeSnhSpieO6LK2OVbdLPi5MPPs09Ii+gMO8nY4S3iKQxBxDmWQ==}
+    requiresBuild: true
     dependencies:
       de-indent: 1.0.2
       he: 1.2.0
@@ -8421,6 +8452,11 @@ packages:
   /xmlchars/2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
     dev: true
+
+  /xmlhttprequest-ssl/2.0.0:
+    resolution: {integrity: sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==}
+    engines: {node: '>=0.4.0'}
+    dev: false
 
   /xss/1.0.14:
     resolution: {integrity: sha512-og7TEJhXvn1a7kzZGQ7ETjdQVS2UfZyTlsEdDOqvQF7GoxNfY+0YLCzBy1kPdsDDx4QuNAonQPddpsn6Xl/7sw==}
