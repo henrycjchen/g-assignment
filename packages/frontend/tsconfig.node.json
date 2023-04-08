@@ -5,5 +5,5 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "unocss-rules.ts"]
+  "include": ["./conf/env.ts", "vite.config.ts", "unocss-rules.ts"]
 }

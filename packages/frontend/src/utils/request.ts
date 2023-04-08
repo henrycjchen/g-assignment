@@ -1,5 +1,7 @@
-const BaseUrl = 'localhost:3000';
 import { io, Socket } from 'socket.io-client';
+import { PORT } from '@gradual/backend/conf/env';
+
+const BaseUrl = `localhost:${PORT}`;
 
 export function request(url: string, opts: RequestInit) {
   return fetch(url.startsWith('/') ? BaseUrl + url : url, opts);

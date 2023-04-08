@@ -1,7 +1,7 @@
 {
-  "name": "frontend-react",
+  "name": "@gradual/frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gradual/backend": "workspace:^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-use": "^17.4.0",
     "socket.io-client": "^4.6.1"
   },
   "devDependencies": {

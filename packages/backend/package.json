@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@gradual/backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.6.0",
+    "@gradual/frontend": "workspace:^0.0.1",
     "@nestjs/apollo": "^11.0.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
