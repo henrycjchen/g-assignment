@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Channel } from './channel.schema';
 
 @Injectable()
@@ -18,6 +18,20 @@ export class ChannelService {
   }
 
   async findByUserId(userId: string): Promise<Channel[]> {
-    return this.channelModel.find({ users: { $all: [userId] } }).exec();
+    return this.channelModel
+      .aggregate([
+        {
+          $match: { userIds: { $all: [new Types.ObjectId(userId)] } },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'userIds',
+            foreignField: '_id',
+            as: 'users',
+          },
+        },
+      ])
+      .exec();
   }
 }

@@ -6,6 +6,7 @@ import {
   WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
+import { randomUUID } from 'crypto';
 import { ObjectId } from 'mongoose';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -43,31 +44,15 @@ export class EventsGateway {
     @MessageBody() data: Message,
     @ConnectedSocket() socket: Socket
   ): void {
-    socket.to(data.channelId).emit('message', data.message);
+    const message = {
+      ...data,
+      messageId: randomUUID(),
+      timestamp: Date.now(),
+      userId: socket.handshake.auth.token,
+    };
+    socket.to(data.channelId).emit('message', message);
+    this.server.to(socket.id).emit('message', message);
   }
-
-  // @SubscribeMessage('identity')
-  // async identity(
-  //   @MessageBody() userId: string,
-  //   @ConnectedSocket() socket: Socket
-  //   // @WebSocketServer() server: Server,
-  // ): Promise<string> {
-  //   try {
-  //     // const user = await this.userService.findOne(userId);
-  //     // const cache = clientCache.some((v) => v.client.id === socket.id);
-  //     // if (!cache) {
-  //     //   clientCache.push({
-  //     //     socket,
-  //     //     userId: user._id.toString(),
-  //     //   });
-  //     // }
-  //     const channels = await this.channelService.findByUserId(userId);
-  //     socket.join(channels.map((channel) => channel._id.toString()));
-  //   } catch (e) {
-  //     console.error('identity e', e);
-  //   }
-  //   return 'success ' + socket.id;
-  // }
 
   /**
    * join rooms when socket connected
@@ -83,6 +68,7 @@ export class EventsGateway {
    * leave rooms when socket disconnected
    */
   async handleDisconnect(@ConnectedSocket() socket: Socket) {
+    if (!socket.handshake.auth.token) return;
     const channels = await this.channelService.findByUserId(
       socket.handshake.auth.token
     );

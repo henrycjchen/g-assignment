@@ -22,7 +22,10 @@ type Channel {
   type: Float!
 
   """channel's user id"""
-  users: [String!]!
+  userIds: [String!]!
+
+  """channel's users"""
+  users: [User!]!
 }
 
 type Query {

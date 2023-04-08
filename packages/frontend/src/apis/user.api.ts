@@ -1,13 +1,25 @@
-import { io } from 'socket.io-client';
+import { request } from '../utils/request';
+import { UserItem } from '@/types/user.type';
 
-export function login() {
-  const socket = io('ws://example.com/my-namespace', {
-    reconnectionDelayMax: 10000,
-    auth: {
-      token: '123',
+const query = `query User($userId: String!) {
+  user(_id: $userId) {
+    _id,
+    name,
+    avatar,
+  }
+}`;
+
+export async function getUser(userId: string): Promise<UserItem> {
+  const res = await request('/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-    query: {
-      'my-key': 'my-value',
-    },
+    body: JSON.stringify({
+      query: query,
+      variables: { userId },
+    }),
   });
+  return res.data.user;
 }

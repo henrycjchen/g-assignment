@@ -1,11 +1,8 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
-enum ChannelType {
-  User = 1,
-  Group,
-}
+import { User } from '../user/user.schema';
+import { ChannelType } from './channel.type';
 
 @Schema()
 @ObjectType()
@@ -23,7 +20,13 @@ export class Channel {
 
   @Prop()
   @Field(() => [String], { description: "channel's user id" })
-  users: string[];
+  userIds: string[];
+
+  /**
+   * 关联查询节点
+   */
+  @Field(() => [User], { description: "channel's users" })
+  users: User[];
 }
 
 export const ChannelSchema = SchemaFactory.createForClass(Channel);

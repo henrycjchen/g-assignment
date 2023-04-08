@@ -8,7 +8,7 @@ export class ChannelResolver {
   constructor(private readonly channelService: ChannelService) {}
 
   @Query(() => [Channel], { name: 'channels' })
-  findAll(@Args('userId', { type: () => String }) userId: string) {
+  async findAll(@Args('userId', { type: () => String }) userId: string) {
     return this.channelService.findByUserId(userId);
   }
 
