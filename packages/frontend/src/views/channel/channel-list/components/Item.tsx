@@ -1,9 +1,10 @@
-import type { Channel } from '../type';
+import IconSearch from '@/assets/imgs/icon-search.png';
+import { ChannelItem } from '@/types/channel.type';
 
 export default function Item({
   isActive,
 }: {
-  data: Channel;
+  data: ChannelItem;
   isActive: boolean;
 }) {
   return (

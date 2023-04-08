@@ -1,10 +1,12 @@
 import { io, Socket } from 'socket.io-client';
-import { PORT } from '@gradual/backend/conf/env';
+import { getSearchParams } from './url';
 
-const BaseUrl = `localhost:${PORT}`;
+const BaseUrl = `/api`;
 
 export function request(url: string, opts: RequestInit) {
-  return fetch(url.startsWith('/') ? BaseUrl + url : url, opts);
+  return fetch(url.startsWith('/') ? BaseUrl + url : url, opts).then((v) =>
+    v.json()
+  );
 }
 
 let socket: Socket;
@@ -12,10 +14,7 @@ export function initSocketIO() {
   socket = io(`ws://${BaseUrl}/`, {
     reconnectionDelayMax: 10000,
     auth: {
-      token: '123',
-    },
-    query: {
-      'my-key': 'my-value',
+      token: getSearchParams('userId'),
     },
   });
 }

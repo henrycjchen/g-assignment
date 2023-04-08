@@ -41,31 +41,53 @@ export class EventsGateway {
   @SubscribeMessage('message')
   message(
     @MessageBody() data: Message,
-    @ConnectedSocket() client: Socket
+    @ConnectedSocket() socket: Socket
   ): void {
-    client.to(data.channelId).emit('message', data.message);
+    socket.to(data.channelId).emit('message', data.message);
   }
 
-  @SubscribeMessage('identity')
-  async identity(
-    @MessageBody() userId: string,
-    @ConnectedSocket() client: Socket
-    // @WebSocketServer() server: Server,
-  ): Promise<string> {
-    try {
-      const user = await this.userService.findOne(userId);
-      const cache = clientCache.some((v) => v.client.id === client.id);
-      if (!cache) {
-        clientCache.push({
-          client,
-          userId: user._id.toString(),
-        });
-      }
-      const channels = await this.channelService.findByUserId(userId);
-      client.join(channels.map((channel) => channel._id.toString()));
-    } catch (e) {
-      console.error('identity e', e);
-    }
-    return 'success ' + client.id;
+  // @SubscribeMessage('identity')
+  // async identity(
+  //   @MessageBody() userId: string,
+  //   @ConnectedSocket() socket: Socket
+  //   // @WebSocketServer() server: Server,
+  // ): Promise<string> {
+  //   try {
+  //     // const user = await this.userService.findOne(userId);
+  //     // const cache = clientCache.some((v) => v.client.id === socket.id);
+  //     // if (!cache) {
+  //     //   clientCache.push({
+  //     //     socket,
+  //     //     userId: user._id.toString(),
+  //     //   });
+  //     // }
+  //     const channels = await this.channelService.findByUserId(userId);
+  //     socket.join(channels.map((channel) => channel._id.toString()));
+  //   } catch (e) {
+  //     console.error('identity e', e);
+  //   }
+  //   return 'success ' + socket.id;
+  // }
+
+  /**
+   * join rooms when socket connected
+   */
+  async handleConnection(@ConnectedSocket() socket: Socket) {
+    const channels = await this.channelService.findByUserId(
+      socket.handshake.auth.token
+    );
+    socket.join(channels.map((channel) => channel._id.toString()));
+  }
+
+  /**
+   * leave rooms when socket disconnected
+   */
+  async handleDisconnect(@ConnectedSocket() socket: Socket) {
+    const channels = await this.channelService.findByUserId(
+      socket.handshake.auth.token
+    );
+    channels.forEach((channel) => {
+      socket.leave(channel._id.toString());
+    });
   }
 }

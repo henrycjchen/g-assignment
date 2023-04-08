@@ -16,7 +16,7 @@ make sure you have `mongodb with port 27017` at your current server/computer
 ## Running the app
 
 ```bash
-$ npx pnpm run start -r
+$ npx pnpm run start -r --parallel
 ```
 
 backend will start at `localhost:3000`

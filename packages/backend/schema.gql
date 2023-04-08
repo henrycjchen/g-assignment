@@ -28,6 +28,6 @@ type Channel {
 type Query {
   users: [User!]!
   user(_id: String!): User!
-  channels: [Channel!]!
+  channels(userId: String!): [Channel!]!
   channel(_id: String!): Channel!
 }
