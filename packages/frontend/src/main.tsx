@@ -6,9 +6,6 @@ import 'uno.css';
 import { initSocketIO } from './utils/request';
 import { login } from './store/user.store';
 
-login();
-initSocketIO();
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
