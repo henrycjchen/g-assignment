@@ -4,9 +4,13 @@
   },
   "title": "",
   "type": 1,
-  "users": [
-    "642cdfe297efefb12fcc0eb7",
-    "642b6f0a97efefb12fcc0e9f"
+  "userIds": [
+    {
+      "$oid": "642cdfe297efefb12fcc0eb7"
+    },
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    }
   ]
 },{
   "_id": {
@@ -14,9 +18,13 @@
   },
   "title": "",
   "type": 1,
-  "users": [
-    "642b6f0a97efefb12fcc0e9f",
-    "642b6fc697efefb12fcc0ea0"
+  "userIds": [
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    },
+    {
+      "$oid": "642b6fc697efefb12fcc0ea0"
+    }
   ]
 },{
   "_id": {
@@ -24,8 +32,108 @@
   },
   "title": "",
   "type": 1,
-  "users": [
-    "642b6fc697efefb12fcc0ea0",
-    "642cdfe297efefb12fcc0eb7"
+  "userIds": [
+    {
+      "$oid": "642b6fc697efefb12fcc0ea0"
+    },
+    {
+      "$oid": "642cdfe297efefb12fcc0eb7"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6432207361e8a1a10e029086"
+  },
+  "title": "Share your story",
+  "type": 2,
+  "userIds": [
+    {
+      "$oid": "642cdfe297efefb12fcc0eb7"
+    },
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    },
+    {
+      "$oid": "642b6fc697efefb12fcc0ea0"
+    },
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "643228b961e8a1a10e02908b"
+  },
+  "title": "Design product",
+  "type": 2,
+  "userIds": [
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    },
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    },
+    {
+      "$oid": "642b6fc697efefb12fcc0ea0"
+    },
+    {
+      "$oid": "642b700697efefb12fcc0ea2"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "64322afc61e8a1a10e029096"
+  },
+  "title": "",
+  "type": 1,
+  "userIds": [
+    {
+      "$oid": "642cdfe297efefb12fcc0eb7"
+    },
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "64322b2361e8a1a10e029097"
+  },
+  "title": "",
+  "type": 1,
+  "userIds": [
+    {
+      "$oid": "642b700697efefb12fcc0ea2"
+    },
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "64322b3161e8a1a10e029098"
+  },
+  "title": "",
+  "type": 1,
+  "userIds": [
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    },
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "64322be561e8a1a10e02909a"
+  },
+  "title": "Product team",
+  "type": 2,
+  "userIds": [
+    {
+      "$oid": "642b703597efefb12fcc0ea4"
+    },
+    {
+      "$oid": "642b6f0a97efefb12fcc0e9f"
+    }
   ]
 }]
