@@ -1,3 +1,8 @@
+## Introduce the app
+this is a “burn after close” chat app
+- we will not store messages
+- only online user can receive your message
+
 ## Install the app
 
 ```bash
