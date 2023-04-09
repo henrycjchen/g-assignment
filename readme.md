@@ -1,6 +1,6 @@
 ## Introduce the app
-this is a “burn after close” chat app
-- we will not store messages
+this is a simple chat app
+- we will not store messages in our server, it just store in your current browser
 - only online user can receive your message
 
 ## Install the app

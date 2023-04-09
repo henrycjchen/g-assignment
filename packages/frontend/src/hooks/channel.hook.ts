@@ -4,20 +4,70 @@ import { ChannelItem, MessageInfo } from '@/types/channel.type';
 import { ChannelType } from '@gradual/backend/src/modules/channel/channel.type';
 import { userId } from '@/store/user.store';
 import { socketOnChannel } from '@/utils/request';
+import { useLatest, useLocalStorage } from 'react-use';
+
+function useMessageMap(): [typeof messageMap, typeof storeMessage] {
+  const [messageMap, setMessageMap] = useLocalStorage(
+    `${userId}-messageMap`,
+    {} as Record<string, MessageInfo[]>
+  );
+  const latestMessageMap = useLatest(messageMap);
+
+  function storeMessage({
+    channelId,
+    message,
+  }: {
+    channelId: string;
+    message: MessageInfo;
+  }) {
+    setMessageMap({
+      ...latestMessageMap.current,
+      [channelId]: [...(latestMessageMap.current?.[channelId] || []), message],
+    });
+  }
+
+  return [messageMap, storeMessage];
+}
+
+function useUnreadCountMap(): [
+  typeof unreadCountMap,
+  typeof increaseCount,
+  typeof clearCount
+] {
+  const [unreadCountMap, setUnreadCountMap] = useLocalStorage(
+    `${userId}-unreadCountMap`,
+    {} as Record<string, number>
+  );
+  const latestUnreadCountMap = useLatest(unreadCountMap);
+
+  function increaseCount({ channelId }: { channelId: string }) {
+    setUnreadCountMap({
+      ...latestUnreadCountMap.current,
+      [channelId]: (latestUnreadCountMap.current?.[channelId] || 0) + 1,
+    });
+  }
+
+  function clearCount(channelId: string) {
+    setUnreadCountMap({
+      ...latestUnreadCountMap.current,
+      [channelId]: 0,
+    });
+  }
+
+  return [unreadCountMap, increaseCount, clearCount];
+}
 
 export function useChannels(): [
   ChannelItem[],
   Record<string, MessageInfo[]>,
   Record<string, number>,
-  (channelId: string) => void
+  typeof clearCount
 ] {
   const [channels, setChannels] = useState([] as ChannelItem[]);
-  const [messageMap, setMessageMap] = useState(
-    {} as Record<string, MessageInfo[]>
-  );
-  const [unreadCountMap, setUnreadCountMap] = useState(
-    {} as Record<string, number>
-  );
+
+  const [messageMap, storeMessage] = useMessageMap();
+
+  const [unreadCountMap, increaseCount, clearCount] = useUnreadCountMap();
 
   useEffect(() => {
     (async () => {
@@ -27,31 +77,21 @@ export function useChannels(): [
       result.forEach((c) => {
         socketOnChannel(c._id, (message) => {
           if (c._id !== message.channelId) return;
-          setMessageMap((pre) => ({
-            ...pre,
-            [c._id]: [...(pre[c._id] || []), message],
-          }));
+          storeMessage({ message, channelId: c._id });
           if (message.userId !== userId) {
-            setUnreadCountMap((pre) => {
-              return {
-                ...pre,
-                [c._id]: (pre[c._id] || 0) + 1,
-              };
-            });
+            increaseCount({ channelId: c._id });
           }
         });
       });
     })();
   }, [userId]);
 
-  function crearUnreadCount(channelId: string) {
-    setUnreadCountMap((pre) => ({
-      ...pre,
-      [channelId]: 0,
-    }));
-  }
-
-  return [channels, messageMap, unreadCountMap, crearUnreadCount];
+  return [
+    channels,
+    messageMap as Record<string, MessageInfo[]>,
+    unreadCountMap as Record<string, number>,
+    clearCount,
+  ];
 }
 
 export function useMessages(channelId: string) {
