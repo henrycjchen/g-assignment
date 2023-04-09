@@ -8,10 +8,12 @@ import { ChannelItem, MessageInfo } from '@/types/channel.type';
 export default function ChannelList({
   channels,
   messageMap,
+  unreadCountMap,
   onClick,
 }: {
   channels: ChannelItem[];
   messageMap: Record<string, MessageInfo[]>;
+  unreadCountMap: Record<string, number>;
   onClick: (index: number) => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -29,6 +31,7 @@ export default function ChannelList({
           key={index}
           channel={item}
           messages={messageMap[item._id] || []}
+          unreadCount={unreadCountMap[item._id] || 0}
           isActive={index === activeIndex}
           onClick={() => handleClick(index)}
         />

@@ -8,12 +8,14 @@ import dayjs from 'dayjs';
 export default function Item({
   channel,
   isActive,
-  onClick,
   messages,
+  unreadCount,
+  onClick,
 }: {
   channel: ChannelItem;
   isActive: boolean;
   messages: MessageInfo[];
+  unreadCount: number;
   onClick: () => void;
 }) {
   const title = useChannelTitle(channel);
@@ -39,30 +41,41 @@ export default function Item({
       }
       onClick={onClick}
     >
-      <div className="flex items-center w-40px h-40px mr-10px bg-placeholder border-rd-50% overflow-hidden">
-        {channel.type === ChannelType.User ? (
-          <img
-            src={toUser?.avatar}
-            alt=""
-            className="w-100% h-100% object-cover"
-          />
-        ) : (
-          <div
-            className={`
-              grid
-              ${channel.users.length < 5 ? 'grid-cols-2' : 'grid-cols-3'}
-              gap-2px
-            `}
-          >
-            {channel.users.map((user) => (
+      <div className="relative">
+        <div className="flex items-center w-40px h-40px mr-10px bg-placeholder border-rd-50% overflow-hidden">
+          <>
+            {channel.type === ChannelType.User ? (
               <img
-                src={user?.avatar}
-                key={user._id as unknown as string}
+                src={toUser?.avatar}
                 alt=""
-                className={imgSize + ' object-cover'}
+                className="w-100% h-100% object-cover"
               />
-            ))}
+            ) : (
+              <div
+                className={`
+                grid
+                ${channel.users.length < 5 ? 'grid-cols-2' : 'grid-cols-3'}
+                gap-2px
+              `}
+              >
+                {channel.users.map((user) => (
+                  <img
+                    src={user?.avatar}
+                    key={user._id as unknown as string}
+                    alt=""
+                    className={imgSize + ' object-cover'}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        </div>
+        {unreadCount ? (
+          <div className="absolute top--3px right-4px flex justify-center items-center w-18px h-18px bg-unread color-white border-rd-50% font-11">
+            {unreadCount}
           </div>
+        ) : (
+          ''
         )}
       </div>
       <div className="flex flex-col justify-center flex-1">

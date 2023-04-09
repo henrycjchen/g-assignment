@@ -1,16 +1,23 @@
 import ChannelList from './channel-list/index';
 import ChannelContent from './channel-content/index';
 import { ChannelItem, MessageInfo } from '@/types/channel.type';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useChannels } from '@/hooks/channel.hook';
 
 export default function Channel() {
-  const [channels, messageMap] = useChannels();
+  const [channels, messageMap, unreadCountMap, crearUnreadCount] =
+    useChannels();
   const [index, setIndex] = useState(-1);
 
   function onClick(index: number) {
     setIndex(index);
   }
+
+  useEffect(() => {
+    if (channels[index]?._id) {
+      crearUnreadCount(channels[index]._id);
+    }
+  }, [channels[index], messageMap]);
 
   return (
     <>
@@ -18,6 +25,7 @@ export default function Channel() {
         onClick={onClick}
         channels={channels}
         messageMap={messageMap}
+        unreadCountMap={unreadCountMap}
       />
       <ChannelContent
         channel={channels[index]}
