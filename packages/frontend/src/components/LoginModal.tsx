@@ -4,6 +4,34 @@ import type { RadioChangeEvent } from 'antd';
 import { login } from '@/store/user.store';
 import { initSocketIO } from '@/utils/request';
 
+const users = [
+  {
+    _id: '642b703597efefb12fcc0ea4',
+    name: 'Jenny White',
+    avatar: '/src/assets/imgs/avatar-woman-short.png',
+  },
+  {
+    _id: '642cdfe297efefb12fcc0eb7',
+    name: 'Courtney Henry',
+    avatar: '/src/assets/imgs/avatar-woman-long.png',
+  },
+  {
+    _id: '642b700697efefb12fcc0ea2',
+    name: 'Albert Flores',
+    avatar: '/src/assets/imgs/avatar-man-yellow.png',
+  },
+  {
+    _id: '642b6f0a97efefb12fcc0e9f',
+    name: 'Darlene Robertson',
+    avatar: '/src/assets/imgs/avatar-man-black.png',
+  },
+  {
+    _id: '642b6fc697efefb12fcc0ea0',
+    name: 'Devon Lane',
+    avatar: '/src/assets/imgs/avatar-woman-gray.png',
+  },
+];
+
 export default function LoginModal({
   onReady,
 }: {
@@ -41,9 +69,18 @@ export default function LoginModal({
     >
       <Radio.Group onChange={onChange} value={value}>
         <Space direction="vertical">
-          <Radio value={'642cdfe297efefb12fcc0eb7'}>Courtney Henry</Radio>
-          <Radio value={'642b6f0a97efefb12fcc0e9f'}>Darlene Robertson</Radio>
-          <Radio value={'642b6fc697efefb12fcc0ea0'}>Devon Lane</Radio>
+          {users.map((user) => (
+            <Radio value={user._id} key={user._id}>
+              <div className="flex items-center">
+                <img
+                  src={user.avatar}
+                  alt=""
+                  className="w-40px h-40px mr-10px"
+                />
+                {user.name}
+              </div>
+            </Radio>
+          ))}
         </Space>
       </Radio.Group>
     </Modal>
