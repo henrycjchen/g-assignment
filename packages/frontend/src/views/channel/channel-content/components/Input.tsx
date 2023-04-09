@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 export default function Input({
   onSend,
@@ -7,11 +7,11 @@ export default function Input({
 }) {
   const [value, setValue] = useState('');
 
-  function onChange(e) {
-    setValue(e.target.value);
+  function onChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setValue(e?.target?.value);
   }
 
-  function onKeyDown(e) {
+  function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Enter') {
       e.preventDefault();
       onSend(value);

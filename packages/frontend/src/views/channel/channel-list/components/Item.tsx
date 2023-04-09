@@ -1,15 +1,17 @@
 import IconSearch from '@/assets/imgs/icon-search.png';
 import { useChannelTitle } from '@/hooks/channel.hook';
 import { userId } from '@/store/user.store';
-import { ChannelItem } from '@/types/channel.type';
+import { ChannelItem, MessageInfo } from '@/types/channel.type';
 
 export default function Item({
   channel,
   isActive,
   onClick,
+  messages,
 }: {
   channel: ChannelItem;
   isActive: boolean;
+  messages: MessageInfo[];
   onClick: () => void;
 }) {
   const title = useChannelTitle(channel);
@@ -33,7 +35,7 @@ export default function Item({
       <div className="flex flex-col justify-center">
         <div className="font-heading-h5 color-text-primary mb-2px">{title}</div>
         <div className="font-heading-h6 color-text-secondary">
-          So, what&apos;s your plan this weekend?
+          {messages[messages.length - 1]?.message}
         </div>
       </div>
     </div>

@@ -1,19 +1,28 @@
 import ChannelList from './channel-list/index';
 import ChannelContent from './channel-content/index';
-import { ChannelItem } from '@/types/channel.type';
+import { ChannelItem, MessageInfo } from '@/types/channel.type';
 import { useState } from 'react';
+import { useChannels } from '@/hooks/channel.hook';
 
 export default function Channel() {
-  const [channel, setChannel] = useState<ChannelItem>();
+  const [channels, messageMap] = useChannels();
+  const [index, setIndex] = useState(-1);
 
-  function onChannelClick(channel: ChannelItem) {
-    setChannel(channel);
+  function onClick(index: number) {
+    setIndex(index);
   }
 
   return (
     <>
-      <ChannelList onClick={onChannelClick} />
-      <ChannelContent channel={channel} />
+      <ChannelList
+        onClick={onClick}
+        channels={channels}
+        messageMap={messageMap}
+      />
+      <ChannelContent
+        channel={channels[index]}
+        messages={messageMap[channels[index]?._id] || []}
+      />
     </>
   );
 }

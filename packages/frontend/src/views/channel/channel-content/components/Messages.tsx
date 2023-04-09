@@ -10,7 +10,7 @@ export default function Messages({
   channel: ChannelItem;
   messages: MessageInfo[];
 }) {
-  const bottomEl = React.createRef();
+  const bottomEl = React.createRef<HTMLDivElement>();
 
   const scrollToBottom = () => {
     bottomEl.current?.scrollIntoView();

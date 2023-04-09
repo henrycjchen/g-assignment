@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getChannels } from '@/apis/channel.api';
 import { getSearchParams } from '@/utils/url';
 import { ChannelItem, MessageInfo } from '@/types/channel.type';
@@ -7,16 +7,32 @@ import { userId } from '@/store/user.store';
 import { socket, socketOnChannel } from '@/utils/request';
 import { useEffectOnce } from 'react-use';
 
-export function useChannels() {
+export function useChannels(): [ChannelItem[], Record<string, MessageInfo[]>] {
   const [channels, setChannels] = useState([] as ChannelItem[]);
+  const [messageMap, setMessageMap] = useState(
+    {} as Record<string, MessageInfo[]>
+  );
 
   useEffect(() => {
-    getChannels(userId).then(async (result) => {
+    (async () => {
+      const result = await getChannels(userId);
       setChannels(result);
-    });
+
+      result.forEach((c) => {
+        socketOnChannel(c._id, (message) => {
+          if (c._id !== message.channelId) return;
+          setMessageMap((pre) => {
+            return {
+              ...pre,
+              [c._id]: [...(pre[c._id] || []), message],
+            };
+          });
+        });
+      });
+    })();
   }, [userId]);
 
-  return [channels];
+  return [channels, messageMap];
 }
 
 export function useMessages(channelId: string) {

@@ -5,7 +5,13 @@ import Input from './components/Input';
 import Messages from './components/Messages';
 import Title from './components/Title';
 
-export default function ChannelContent({ channel }: { channel?: ChannelItem }) {
+export default function ChannelContent({
+  channel,
+  messages,
+}: {
+  channel?: ChannelItem;
+  messages: MessageInfo[];
+}) {
   function onSend(message: string) {
     if (channel) {
       sendMessage({
@@ -15,7 +21,7 @@ export default function ChannelContent({ channel }: { channel?: ChannelItem }) {
     }
   }
 
-  const [messages] = useMessages(channel?._id || '');
+  // const [messages] = useMessages(channel?._id || '');
 
   return (
     <div className="flex flex-col w-100% bg-divider">
