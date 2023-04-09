@@ -7,7 +7,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ChannelModule } from './modules/channel/channel.module';
 import { EventsModule } from './modules/events/events.module';
-import { UserService } from './modules/user/user.service';
 
 @Module({
   imports: [

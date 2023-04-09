@@ -4,22 +4,11 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
-  WsResponse,
 } from '@nestjs/websockets';
 import { randomUUID } from 'crypto';
-import { ObjectId } from 'mongoose';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Server, Socket } from 'socket.io';
 import { ChannelService } from '../channel/channel.service';
 import { UserService } from '../user/user.service';
-
-/**
- * todo
- * 需要对缓存设计淘汰机制，并断开对应连接
- * 避免内存泄漏
- */
-const clientCache: { client: Socket; userId?: string }[] = [];
 
 interface Message {
   channelId: string;

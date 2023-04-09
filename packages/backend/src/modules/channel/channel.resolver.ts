@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { ChannelService } from './channel.service';
 import { Channel } from './channel.schema';
 //import { Blog } from './blog.schema';
