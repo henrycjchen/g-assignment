@@ -1,8 +1,6 @@
-import { useState, useSyncExternalStore } from 'react';
-import { getSearchParams } from '@/utils/url';
+import { useState } from 'react';
 import Item from './components/Item';
 import Search from './components/Search';
-import { useChannels } from '@/hooks/channel.hook';
 import { ChannelItem, MessageInfo } from '@/types/channel.type';
 
 export default function ChannelList({

@@ -1,6 +1,5 @@
 import ChannelList from './channel-list/index';
 import ChannelContent from './channel-content/index';
-import { ChannelItem, MessageInfo } from '@/types/channel.type';
 import { useEffect, useState } from 'react';
 import { useChannels } from '@/hooks/channel.hook';
 

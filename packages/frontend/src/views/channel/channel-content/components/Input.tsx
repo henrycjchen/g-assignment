@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useState } from 'react';
 
 export default function Input({
   onSend,

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getChannels } from '@/apis/channel.api';
-import { getSearchParams } from '@/utils/url';
 import { ChannelItem, MessageInfo } from '@/types/channel.type';
 import { ChannelType } from '@gradual/backend/src/modules/channel/channel.type';
 import { userId } from '@/store/user.store';
-import { socket, socketOnChannel } from '@/utils/request';
-import { useEffectOnce } from 'react-use';
+import { socketOnChannel } from '@/utils/request';
 
 export function useChannels(): [
   ChannelItem[],
@@ -71,7 +69,7 @@ export function useMessages(channelId: string) {
 }
 
 export function useChannelTitle(channel: ChannelItem) {
-  const [title, setTitle] = useState(channel.title);
+  const [title] = useState(channel.title);
 
   if (channel.type === ChannelType.User) {
     channel.title =

@@ -1,7 +1,6 @@
 import { userId } from '@/store/user.store';
 import { MessageInfo } from '@/types/channel.type';
 import { io, Socket } from 'socket.io-client';
-import { getSearchParams } from './url';
 
 const BaseUrl = `/api`;
 
