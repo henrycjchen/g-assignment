@@ -4,6 +4,9 @@ import type { RadioChangeEvent } from 'antd';
 import { login } from '@/store/user.store';
 import { initSocketIO } from '@/utils/request';
 
+/**
+ * mock data, users to choose and login
+ */
 const users = [
   {
     _id: '642b703597efefb12fcc0ea4',
@@ -32,21 +35,45 @@ const users = [
   },
 ];
 
+/**
+ * component: login modal
+ * choose user to login
+ */
 export default function LoginModal({
   onReady,
 }: {
+  /**
+   * tell the parent component that the login is ready
+   */
   onReady: (isReady: boolean) => void;
 }) {
+  /**
+   * open the modal or not
+   */
   const [open, setOpen] = useState(true);
+  /**
+   * the user you choose
+   */
   const [value, setValue] = useState('');
 
+  /**
+   * confirm the user you choose
+   * setUserId and build websocket
+   */
   const onOk = () => {
     setOpen(false);
+
+    //#region login and build websocket
     login(value);
     initSocketIO();
+    //#endregion
+
     onReady(true);
   };
 
+  /**
+   * set user choose value
+   */
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };

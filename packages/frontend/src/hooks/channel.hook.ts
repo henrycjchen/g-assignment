@@ -6,6 +6,9 @@ import { userId } from '@/store/user.store';
 import { socketOnChannel } from '@/utils/request';
 import { useLatest, useLocalStorage } from 'react-use';
 
+/**
+ * hook: get and set messageMap from localstorage
+ */
 function useMessageMap(): [typeof messageMap, typeof storeMessage] {
   const [messageMap, setMessageMap] = useLocalStorage(
     `${userId}-messageMap`,
@@ -13,6 +16,9 @@ function useMessageMap(): [typeof messageMap, typeof storeMessage] {
   );
   const latestMessageMap = useLatest(messageMap);
 
+  /**
+   * store message in localstorage
+   */
   function storeMessage({
     channelId,
     message,
@@ -29,6 +35,9 @@ function useMessageMap(): [typeof messageMap, typeof storeMessage] {
   return [messageMap, storeMessage];
 }
 
+/**
+ * hook: get and set unreadCountMap from localstorage
+ */
 function useUnreadCountMap(): [
   typeof unreadCountMap,
   typeof increaseCount,
@@ -40,6 +49,9 @@ function useUnreadCountMap(): [
   );
   const latestUnreadCountMap = useLatest(unreadCountMap);
 
+  /**
+   * set and increase unreadcount in localstorage
+   */
   function increaseCount({ channelId }: { channelId: string }) {
     setUnreadCountMap({
       ...latestUnreadCountMap.current,
@@ -47,6 +59,9 @@ function useUnreadCountMap(): [
     });
   }
 
+  /**
+   * clear unread count
+   */
   function clearCount(channelId: string) {
     setUnreadCountMap({
       ...latestUnreadCountMap.current,
@@ -57,6 +72,9 @@ function useUnreadCountMap(): [
   return [unreadCountMap, increaseCount, clearCount];
 }
 
+/**
+ * hook: get channels and their message/unreadCount
+ */
 export function useChannels(): [
   ChannelItem[],
   Record<string, MessageInfo[]>,

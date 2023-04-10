@@ -1,6 +1,10 @@
 import { ioRuqest, request } from '../utils/request';
 import { ChannelItem } from '@/types/channel.type';
 
+/**
+ * graphql schema
+ * get channels by userId
+ */
 const query = `query Channels($userId: String!) {
   channels(userId: $userId) {
     _id,
@@ -14,6 +18,9 @@ const query = `query Channels($userId: String!) {
   }
 }`;
 
+/**
+ * api: get channels by userId
+ */
 export async function getChannels(userId: string): Promise<ChannelItem[]> {
   const res = await request('/graphql', {
     method: 'POST',
@@ -29,6 +36,9 @@ export async function getChannels(userId: string): Promise<ChannelItem[]> {
   return res.data.channels;
 }
 
+/**
+ * socket api: send message
+ */
 export function sendMessage({
   message,
   channelId,

@@ -1,6 +1,10 @@
 import { request } from '../utils/request';
 import { UserItem } from '@/types/user.type';
 
+/**
+ * graphql schema
+ * get user by userId
+ */
 const query = `query User($userId: String!) {
   user(_id: $userId) {
     _id,
@@ -9,6 +13,9 @@ const query = `query User($userId: String!) {
   }
 }`;
 
+/**
+ * api: get user by userId
+ */
 export async function getUser(userId: string): Promise<UserItem> {
   const res = await request('/graphql', {
     method: 'POST',
