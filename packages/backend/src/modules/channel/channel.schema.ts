@@ -7,23 +7,38 @@ import { ChannelType } from './channel.type';
 @Schema()
 @ObjectType()
 export class Channel {
+  /**
+   * channelId
+   */
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
+  /**
+   * the title of this channel
+   * if channel.type === ChannelType.user, this title will be empty
+   * and the frontend will use user's name as title
+   */
   @Prop()
   @Field(() => String, { description: 'channel title' })
   title: string;
 
+  /**
+   * channel's type
+   */
   @Prop()
   @Field(() => Number, { description: 'channel type' })
   type: ChannelType;
 
+  /**
+   * userId list, includes the users of this channel
+   */
   @Prop()
   @Field(() => [String], { description: "channel's user id" })
   userIds: string[];
 
   /**
-   * 关联查询节点
+   * virtual field
+   * associate with collection user
    */
   @Field(() => [User], { description: "channel's users" })
   users: User[];

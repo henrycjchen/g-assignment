@@ -28,6 +28,10 @@ export class EventsGateway {
   @WebSocketServer()
   server: Server;
 
+  /**
+   * listen on message
+   * and transfer to others
+   */
   @SubscribeMessage('message')
   message(
     @MessageBody() data: Message,
@@ -39,7 +43,15 @@ export class EventsGateway {
       timestamp: Date.now(),
       userId: socket.handshake.auth.token,
     };
+    /**
+     * send message to users in the same channel/rooms
+     * the 'to' method is send to every but exclude the current user
+     */
     socket.to(data.channelId).emit('message', message);
+    /**
+     * send messge to current user
+     * to make sure every user receive the same message structure
+     */
     this.server.to(socket.id).emit('message', message);
   }
 
